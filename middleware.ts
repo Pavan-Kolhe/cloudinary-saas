@@ -10,8 +10,9 @@ const isPublicRoute = createRouteMatcher([
 
 const isPublicApiRoute = createRouteMatcher(["/api/videos"]);
 
-export default clerkMiddleware((auth, req) => {
-  const { userId } = auth(); // id hai malab logged in hai
+export default clerkMiddleware(async (auth, req) => {
+  const { userId } = await auth(); // id hai malab logged in hai
+  // console.log("user ID :", userId);
   const currentUrl = new URL(req.url);
   const isAccessingDashboard = currentUrl.pathname === "/home";
   const isApiRequest = currentUrl.pathname.startsWith("/api");
